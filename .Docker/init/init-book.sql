@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS `book` CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+GRANT ALL PRIVILEGES ON `book`.* TO 'book'@'%';
