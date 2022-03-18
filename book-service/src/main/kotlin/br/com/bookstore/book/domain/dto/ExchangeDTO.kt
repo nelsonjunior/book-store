@@ -5,7 +5,8 @@ data class ExchangeDTO(
     val from: String,
     val to: String,
     val conversionFactor: Double,
-    val convertedValue: Double
+    val convertedValue: Double,
+    val environment: String
 ){
-    constructor() : this(-1L, "", "", Double.NaN, Double.NaN)
+    constructor() : this(-1L, "", "", Double.NaN, Double.NaN, "")
 }

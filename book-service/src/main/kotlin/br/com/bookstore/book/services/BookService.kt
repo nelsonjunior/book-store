@@ -17,8 +17,6 @@ class BookService(
     fun findBook(id: Long, currency: String
     ) : BookDTO {
 
-        val environmentPort = "Port: ${environment.getProperty("local.server.port")}";
-
         val book = repository.findBookById(id)
 
         if (!book.isPresent) {
@@ -26,6 +24,8 @@ class BookService(
         }
 
         val exchange = exchangeProxy.getExchange(book.get().price, "USD", currency)
+
+        val environmentPort = "Book port: ${environment.getProperty("local.server.port")} - Exchange port: ${exchange.environment}";
 
         return BookDTO(
             book.get().id,

@@ -1,0 +1,38 @@
+server:
+  port: 8765
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761/eureka
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+#          lower-case-service-id: true
+      routes:
+      - id: exchange-docs
+        uri: lb://exchange-service
+        predicates:
+          - Path=/v3/api-docs/exchange-service
+        filters:
+          - RewritePath=/v3/api-docs/exchange-service, /v3/api-docs
+      - id: exchange-service
+        uri: lb://exchange-service
+        predicates:
+          - Path=/exchange/**
+      - id: book-docs
+        uri: lb://book-service
+        predicates:
+          - Path=/v3/api-docs/book-service
+        filters:
+          - RewritePath=/v3/api-docs/book-service, /v3/api-docs
+      - id: book-service
+        uri: lb://book-service
+        predicates:
+          - Path=/books/**
+#        filters:
+#          - RewritePath=/books/(?<path>.*), /book-service/books/$\{path}
