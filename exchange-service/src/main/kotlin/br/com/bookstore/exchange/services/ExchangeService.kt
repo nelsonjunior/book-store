@@ -1,9 +1,10 @@
 package br.com.bookstore.exchange.services
 
 import br.com.bookstore.exchange.domain.dto.ExchangeDTO
-import br.com.bookstore.exchange.domain.entities.Exchange
 import br.com.bookstore.exchange.exceptions.ExchangeException
 import br.com.bookstore.exchange.repositories.ExchangeRepository
+import org.springframework.cache.annotation.CacheEvict
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
@@ -15,11 +16,12 @@ class ExchangeService(
     val repository: ExchangeRepository
 ) {
 
-    fun getExchange(amount: BigDecimal, from: String, to: String) : ExchangeDTO {
+    @Cacheable("exchange", key = "{#from, #to}")
+    fun exchangeAmount(amount: BigDecimal, from: String, to: String) : ExchangeDTO {
 
         val environmentPort = "Port: ${environment.getProperty("local.server.port")}";
 
-        val exchange = repository.findByFromAndTo(from, to);
+        val exchange = getExchange(from, to);
 
         if(!exchange.isPresent){
             throw ExchangeException("Currency Unsupported")
@@ -35,7 +37,17 @@ class ExchangeService(
             convertedValue,
             environmentPort
         )
+    }
 
+    fun getExchange(from: String, to: String) = repository.findByFromAndTo(from, to)
 
+    @CacheEvict("exchange", key = "{#from, #to}")
+    fun updateConversionFactor(from: String, to: String, newConversionFactor: BigDecimal) {
+        val exchange = getExchange(from, to)
+        if(exchange.isPresent) {
+            var updateExchange = exchange.get()
+            updateExchange.conversionFactor = newConversionFactor
+            repository.save(updateExchange)
+        }
     }
 }

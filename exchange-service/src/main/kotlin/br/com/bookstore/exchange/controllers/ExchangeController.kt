@@ -28,5 +28,5 @@ class ExchangeController(
         @PathVariable("amount") amount: BigDecimal,
         @PathVariable("from") from: String,
         @PathVariable("to") to: String
-    ) = service.getExchange(amount, from, to)
+    ) = service.exchangeAmount(amount, from, to)
 }

@@ -25,6 +25,10 @@ spring:
     user: exchange
     password: exchange
     schemas: exchange
+
+  redis:
+    host: localhost
+    port: 6380
 kafka:
   bootstrapAddress: localhost:9092
   topics:

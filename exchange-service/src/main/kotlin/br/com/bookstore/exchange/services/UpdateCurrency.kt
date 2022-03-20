@@ -7,22 +7,16 @@ import org.springframework.stereotype.Service
 
 @Service
 class UpdateCurrency (
-    val repository: ExchangeRepository
+    val exchangeService: ExchangeService
 ){
 
-    @CacheEvict("exchange")
     fun updateCurrency(currencyMultiRate: CurrencyMultiRate) {
 
         val from = currencyMultiRate.base
 
         currencyMultiRate.results
             .forEach{
-                val exchange = repository.findByFromAndTo(from, it.key)
-                if(exchange.isPresent) {
-                    var updateExchange = exchange.get()
-                    updateExchange.conversionFactor = it.value.toBigDecimal()
-                    repository.save(updateExchange)
-                }
+                exchangeService.updateConversionFactor(from, it.key, it.value.toBigDecimal())
             }
     }
 }

@@ -6,16 +6,16 @@ import javax.persistence.*
 
 @Entity(name = "exchange")
 @DynamicUpdate
-data class Exchange(
+class Exchange(
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    var id: Long,
 
     @Column(name = "from_currency", nullable = false, length = 3)
-    val from: String,
+    var from: String,
 
     @Column(name = "to_currency", nullable = false, length = 3)
-    val to: String,
+    var to: String,
 
     @Column(nullable = false)
     var conversionFactor: BigDecimal

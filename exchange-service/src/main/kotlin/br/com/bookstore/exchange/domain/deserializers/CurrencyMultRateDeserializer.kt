@@ -15,7 +15,7 @@ class CurrencyMultRateDeserializer : Deserializer<CurrencyMultiRate> {
         log.info("Deserializing...")
 
         return mapper.readValue<CurrencyMultiRate>(String(
-            data ?: throw SerializationException("Error when deserializing byte[] to Product"), Charsets.UTF_8
+            data ?: throw SerializationException("Error when deserializing byte[] to CurrencyMultiRate"), Charsets.UTF_8
             ), CurrencyMultiRate::class.java)
     }
 

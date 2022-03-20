@@ -70,6 +70,19 @@ services:
       - "19000:9000"
     environment:
       KAFKA_BROKERCONNECT: kafka:29092
+
+  redis:
+    container_name: sbs_redis
+    image: redis:6.2.3
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+    networks:
+      - local-dev
 networks:
   local-dev:
     driver: bridge
