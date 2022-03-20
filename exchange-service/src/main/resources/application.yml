@@ -25,6 +25,10 @@ spring:
     user: exchange
     password: exchange
     schemas: exchange
+kafka:
+  bootstrapAddress: localhost:9092
+  topics:
+    currency-update: currency-update
 springdoc:
   show-actuator: true
 #  api-docs:

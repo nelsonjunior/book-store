@@ -1,11 +1,11 @@
-package br.com.bookstore.currencyservice.domain
+package br.com.bookstore.exchange.domain.entities
 
-import java.time.LocalDateTime
+import java.util.Date
 
 data class CurrencyMultiRate(
     val base: String,
     val results: Map<String, Double>,
-    val updated: LocalDateTime
+    val updated: Date
 ){
     override fun toString(): String {
         return "CurrencyMultiRate(base='$base', results=$results, updated=$updated)"

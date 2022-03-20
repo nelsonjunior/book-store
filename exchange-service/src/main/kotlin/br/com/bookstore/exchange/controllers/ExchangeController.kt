@@ -4,6 +4,7 @@ import br.com.bookstore.exchange.domain.dto.ExchangeDTO
 import br.com.bookstore.exchange.domain.entities.Exchange
 import br.com.bookstore.exchange.exceptions.ExchangeException
 import br.com.bookstore.exchange.repositories.ExchangeRepository
+import br.com.bookstore.exchange.services.ExchangeService
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.core.env.Environment
@@ -18,8 +19,8 @@ import java.math.RoundingMode
 @RestController
 @RequestMapping("exchange")
 class ExchangeController(
-    val environment: Environment,
-    val repository: ExchangeRepository) {
+    val service: ExchangeService
+) {
 
     @Operation(summary = "Get exchange amount value curreny")
     @GetMapping("/{amount}/{from}/{to}")
@@ -27,27 +28,5 @@ class ExchangeController(
         @PathVariable("amount") amount: BigDecimal,
         @PathVariable("from") from: String,
         @PathVariable("to") to: String
-    ): ExchangeDTO {
-
-        val environmentPort = "Port: ${environment.getProperty("local.server.port")}";
-
-        val exchange = repository.findByFromAndTo(from, to);
-
-        if(!exchange.isPresent){
-            throw ExchangeException("Currency Unsupported")
-        }
-
-        val convertedValue = exchange.get().conversionFactor.multiply(amount).setScale(2, RoundingMode.CEILING)
-
-        return ExchangeDTO(
-            exchange.get().id,
-            exchange.get().from,
-            exchange.get().to,
-            exchange.get().conversionFactor,
-            convertedValue,
-            environmentPort
-        )
-    }
-
-
+    ) = service.getExchange(amount, from, to)
 }

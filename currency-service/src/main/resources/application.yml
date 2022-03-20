@@ -10,3 +10,10 @@ spring:
     name: currency-service
 scheduler:
   cron: "0 0/1 * * * *"
+kafka:
+  bootstrapAddress: localhost:9092
+  topics:
+    currency-update: currency-update
+currency:
+  from: USD
+  to: BRL, GBP, ARS, EUR, COP, MXN, CLP
