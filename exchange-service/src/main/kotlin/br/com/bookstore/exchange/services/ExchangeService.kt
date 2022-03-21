@@ -19,9 +19,9 @@ class ExchangeService(
     @Cacheable("exchange", key = "{#from, #to}")
     fun exchangeAmount(amount: BigDecimal, from: String, to: String) : ExchangeDTO {
 
-        val environmentPort = "Port: ${environment.getProperty("local.server.port")}";
+        val environmentPort = "Port: ${environment.getProperty("local.server.port")}"
 
-        val exchange = getExchange(from, to);
+        val exchange = getExchange(from, to)
 
         if(!exchange.isPresent){
             throw ExchangeException("Currency Unsupported")

@@ -26,8 +26,8 @@ class FooBarController(
     @Retry(name = "default", fallbackMethod = "defaultFooBar")
     @Bulkhead(name = "default")
     fun foobarRetry() : String {
-        logger.info("foo-bar request");
-        val response = restTemplate.getForEntity("http://localhost:8080/foo-bar", String.javaClass);
+        logger.info("foo-bar request")
+        val response = restTemplate.getForEntity("http://localhost:8080/foo-bar", String.javaClass)
         return response.body.toString()
     }
 
@@ -35,8 +35,8 @@ class FooBarController(
     @GetMapping("/foo-bar-circuit-break")
     @CircuitBreaker(name = "default", fallbackMethod = "defaultCircuitBreakFooBar")
     fun foobarCircuitBreaker() : String {
-        logger.info("foo-bar request");
-        val response = restTemplate.getForEntity("http://localhost:8080/foo-bar", String.javaClass);
+        logger.info("foo-bar request")
+        val response = restTemplate.getForEntity("http://localhost:8080/foo-bar", String.javaClass)
         return response.body.toString()
     }
 
@@ -45,8 +45,8 @@ class FooBarController(
     @RateLimiter(name = "default")
     @CircuitBreaker(name = "default", fallbackMethod = "defaultCircuitBreakFooBar")
     fun foobarRateLimiter() : String {
-        logger.info("foo-bar request");
-        val response = restTemplate.getForEntity("http://localhost:8080/foo-bar", String.javaClass);
+        logger.info("foo-bar request")
+        val response = restTemplate.getForEntity("http://localhost:8080/foo-bar", String.javaClass)
         return response.body.toString()
     }
 
