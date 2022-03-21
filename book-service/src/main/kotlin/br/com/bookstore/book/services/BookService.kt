@@ -25,7 +25,7 @@ class BookService(
 
         val exchange = exchangeProxy.getExchange(book.get().price, "USD", currency)
 
-        val environmentPort = "Book port: ${environment.getProperty("local.server.port")} - Exchange port: ${exchange.environment}";
+        val environmentPort = "Book port: ${environment.getProperty("local.server.port")} - Exchange port: ${exchange.environment}"
 
         return BookDTO(
             book.get().id,

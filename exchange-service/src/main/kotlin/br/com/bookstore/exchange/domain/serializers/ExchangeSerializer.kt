@@ -12,7 +12,7 @@ class ExchangeSerializer : RedisSerializer<ExchangeDTO> {
 
     override fun serialize(t: ExchangeDTO?): ByteArray? {
         log.info("Serializing ExchangeDTO...")
-        return mapper.writeValueAsBytes(t);
+        return mapper.writeValueAsBytes(t)
     }
 
     override fun deserialize(data: ByteArray?): ExchangeDTO? {
