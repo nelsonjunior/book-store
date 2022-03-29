@@ -41,7 +41,9 @@ spring:
     user: book
     password: book
     schemas: book
-
+  sleuth:
+    sampler:
+      probability: 1.0 # defini percentual do log a ser capturado
   jackson:
     serialization:
       fail-on-empty-beans: false

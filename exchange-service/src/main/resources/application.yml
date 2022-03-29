@@ -25,7 +25,9 @@ spring:
     user: exchange
     password: exchange
     schemas: exchange
-
+  sleuth:
+    sampler:
+      probability: 1.0
   redis:
     host: localhost
     port: 6380

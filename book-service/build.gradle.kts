@@ -19,6 +19,7 @@ repositories {
 
 extra["springCloudVersion"] = "2021.0.1"
 extra["resilience4jVersion"] = "1.7.0"
+extra["p6spyVersion"] = "1.8.0"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -27,6 +28,10 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     implementation("org.springframework.boot:spring-boot-starter-aop")
+    implementation("org.springframework.cloud:spring-cloud-starter-sleuth")
+    implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin")
+    implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:${property("p6spyVersion")}")
+    implementation("org.springframework.amqp:spring-rabbit")
     implementation("org.springdoc:springdoc-openapi-webmvc-core:1.6.6")
     implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
     implementation("io.github.resilience4j:resilience4j-spring-boot2:${property("resilience4jVersion")}")

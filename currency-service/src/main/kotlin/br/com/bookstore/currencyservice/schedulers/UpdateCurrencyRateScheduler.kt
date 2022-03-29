@@ -19,7 +19,7 @@ class UpdateCurrencyRateScheduler (
     private val logger = LoggerFactory.getLogger(UpdateCurrencyRateScheduler::class.java)
 
     @Scheduled(cron = "\${scheduler.cron}")
-    private fun execute() {
+    protected fun execute() {
 
         logger.info("UpdateCurrencyRateScheduler $from : $to")
 

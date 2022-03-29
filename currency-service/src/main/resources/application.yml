@@ -8,6 +8,13 @@ eureka:
 spring:
   application:
     name: currency-service
+  sleuth:
+    sampler:
+      probability: 1.0
+zipkin:
+  collector:
+    kafka:
+      bootstrap-servers: localhost:9092
 scheduler:
   cron: "0 0/1 * * * *"
 kafka:

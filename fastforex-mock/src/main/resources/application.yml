@@ -3,3 +3,6 @@ server:
 spring:
   application:
     name: fastforex-api-mock
+  sleuth:
+    sampler:
+      probability: 1.0

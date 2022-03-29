@@ -25,6 +25,9 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-gateway")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     implementation("org.springdoc:springdoc-openapi-webflux-ui:1.6.6")
+    implementation("org.springframework.cloud:spring-cloud-starter-sleuth")
+    implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin")
+    implementation("org.springframework.amqp:spring-rabbit")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

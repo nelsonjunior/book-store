@@ -19,7 +19,8 @@ repositories {
 extra["springCloudVersion"] = "2021.0.1"
 extra["resilience4jVersion"] = "1.7.0"
 extra["springKafkaVersion"] = "2.8.3"
- 
+extra["p6spyVersion"] = "1.8.0"
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -36,6 +37,10 @@ dependencies {
     implementation("org.flywaydb:flyway-core")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.springframework.cloud:spring-cloud-starter-sleuth")
+    implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin")
+    implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:${property("p6spyVersion")}")
+    implementation("org.springframework.amqp:spring-rabbit")
 //    implementation("org.springframework.cloud:spring-cloud-starter-config")
     runtimeOnly("mysql:mysql-connector-java")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
