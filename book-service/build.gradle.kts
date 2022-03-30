@@ -31,6 +31,8 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-sleuth")
     implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin")
     implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:${property("p6spyVersion")}")
+    implementation("net.logstash.logback:logstash-logback-encoder:7.0.1")
+    implementation("ch.qos.logback:logback-core:1.2.11")
     implementation("org.springframework.amqp:spring-rabbit")
     implementation("org.springdoc:springdoc-openapi-webmvc-core:1.6.6")
     implementation("org.springdoc:springdoc-openapi-ui:1.6.6")

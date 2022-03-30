@@ -90,8 +90,52 @@ services:
       - "9411:9411"
     networks:
       - local-dev
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.1.1
+    environment:
+      - xpack.security.enabled=false
+      - "discovery.type=single-node"
+    networks:
+      - es-net
+    ports:
+      - "9200:9200"
+
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:8.1.1
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    networks:
+      - es-net
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
+
+  logstash:
+    container_name: logstash
+    image: docker.elastic.co/logstash/logstash:8.1.1
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
+    ports:
+      - "5044:5044"
+      - "5000:5000/tcp"
+      - "5000:5000/udp"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: -Xmx256m -Xms256m
+    networks:
+      - es-net
+    depends_on:
+      - elasticsearch
+
 networks:
   local-dev:
+    driver: bridge
+  es-net:
     driver: bridge
   broker-kafka:
     driver: bridge
